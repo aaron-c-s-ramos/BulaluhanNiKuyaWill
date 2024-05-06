@@ -307,7 +307,7 @@
 .home-link2 {
   display: contents;
 }
-.modal-full-screen.modal-dialog {
+.modal-full-screen {
   max-width: 100%;
   height: 100%;
   margin: 0;

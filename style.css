@@ -142,3 +142,10 @@
   font-weight: 400;
   line-height: 150%;
 }
+.center-all {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  align-self: center;
+}

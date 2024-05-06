@@ -92,7 +92,7 @@
               <div class="home-btn-group">
                 <button type="button" class="btn btn-lg btn-success me-1" onclick="window.location.href='/';" aria-current="page">Home</button>
                 <button type="button" class="btn btn-lg btn-success me-1 text-nowrap" data-bs-toggle="modal" data-bs-target="#foodModal">Explore Menu</button>
-                <button type="button" class="btn btn-lg btn-success me-1 text-nowrap" onclick="window.location.href='/reservation.php';">View Reservations</button>
+                <button type="button" class="btn btn-lg btn-success me-1" onclick="window.location.href='/reservation.php';">View Reservations</button>
                 <button type="button" class="btn btn-lg btn-success me-1 text-nowrap" onclick="window.location.href='/';">Book A Table</button>
               </div>
             </div>

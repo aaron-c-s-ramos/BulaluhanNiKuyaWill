@@ -1,61 +1,36 @@
 <?php
 include_once("conn.php");
 include_once("functions.php");
+$Reservation_ID = 0;
 
-if ($_SERVER["REQUEST_METHOD"] == "POST")
+if (isset($_POST["submit"]))
 {
-    $name = test_input($_POST["name"]);
-    $age = test_input($_POST["age"]);
-    $gender = test_input($_POST["gender"]);
-    $bg_color_age_class = test_input($_POST["bg_color_age_class"]);
-    $bg_color_gender_class = test_input($_POST["bg_color_gender_class"]);
-    $text_color_age_class = test_input($_POST["text_color_age_class"]);
-    $text_color_gender_class = test_input($_POST["text_color_gender_class"]);
+    $search = $_POST['search'];
 
-    $name = fix_name($name);
-
-    if ($age < 18)
+    try
     {
-        $bg_color_age_class = 'table-danger';
-        $text_color_age_class = 'text-white';
-    }
-    elseif ($age >= 18)
-    {
-        $bg_color_age_class = '';
-        $text_color_age_class = '';
-    }
-
-    if ($gender == 'Male')
-    {
-        $bg_color_gender_class = 'table-primary';
-        $text_color_gender_class = 'text-white';
-    }
-    elseif ($gender == 'Female')
-    {
-        $bg_color_gender_class = 'table-success';
-        $text_color_gender_class = 'text-white';
-    }
-
-    try {
-        $sql = "INSERT INTO tbl_activity5 (name, age, gender, bg_color_age_class, bg_color_gender_class, text_color_age_class, text_color_gender_class) 
-        VALUES (:name, :age, :gender, :bg_color_age_class, :bg_color_gender_class, :text_color_age_class, :text_color_gender_class)";
+        $sql = "SELECT * FROM current_reservations WHERE Reservation_ID = :Reservation_ID";
 
         $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':name', $name);
-        $stmt->bindParam(':age', $age);
-        $stmt->bindParam(':gender', $gender);
-        $stmt->bindParam(':bg_color_age_class', $bg_color_age_class);
-        $stmt->bindParam(':bg_color_gender_class', $bg_color_gender_class);
-        $stmt->bindParam(':text_color_age_class', $text_color_age_class);
-        $stmt->bindParam(':text_color_gender_class', $text_color_gender_class);
-
+        $stmt->bindParam(':Reservation_ID', $search, PDO::PARAM_INT);
         $stmt->execute();
-    }
-    catch (Exception $e)
-    {
+        if ($stmt->rowCount() > 0)
+        {
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            if (is_array($row))
+            {
+            $Reservation_ID = $row['Reservation_ID'];
+            }
+        }
+        else
+        {
+            $Reservation_ID = -1;
+        }
+    } catch (Exception $e) {
         echo $sql . "<br>" . $e->getMessage();
         echo $sql . "<br>" . $e->getTraceAsString();
     }
+    $conn = null;
 }
 ?>
 <!DOCTYPE html>
@@ -199,7 +174,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         <div class="home-main-banner-section">
           <div id="MainBanner" class="home-banner bannerContainer"></div>
         </div>
-        <!-- <div class="modal fade" id="foodModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="foodModalLabel">
+        <div class="modal fade" id="foodModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="foodModalLabel">
           <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-full-screen">
             <div class="modal-content">
               <div class="modal-header d-flex justify-content-between">
@@ -237,201 +212,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
             </div>
           </div>
         </div>
-        <div class="home-features-section">
-          <div class="home-features-container featuresContainer">
-            <div class="home-features">
-              <div class="home-container1">
-                <h2 class="home-features-heading">FEATURES</h2>
-              </div>
-              <div class="home-container2">
-                <div class="featuresCard feature-card-feature-card">
-                  <img class="featuresIcon" src="public/features_icon_box.png" alt="Features Icon Bullet" height="32px">
-                  <div class="feature-card-container">
-                    <h3 class="feature-card-text">
-                      <span>Easy Reservation</span>
-                    </h3>
-                    <span class="bodySmall feature-card-text1">
-                      <span>Book a table in just a few clicks</span>
-                    </span>
-                  </div>
-                </div>
-                <div class="featuresCard feature-card-feature-card">
-                  <img class="featuresIcon" src="public/features_icon_box.png" alt="Features Icon Bullet" height="32px">
-                  <div class="feature-card-container">
-                    <h3 class="feature-card-text">
-                      <span>Extensive Menu Selection</span>
-                    </h3>
-                    <span class="bodySmall feature-card-text1">
-                      <span>Explore a diverse array of culinary delights</span>
-                    </span>
-                  </div>
-                </div>
-                <div class="featuresCard feature-card-feature-card">
-                  <img class="featuresIcon" src="public/features_icon_box.png" alt="Features Icon Bullet" height="32px">
-                  <div class="feature-card-container">
-                    <h3 class="feature-card-text">
-                      <span>Real-Time Availability</span>
-                    </h3>
-                    <span class="bodySmall feature-card-text1">
-                      <span>Check live availability and choose your desired time slot</span>
-                    </span>
-                  </div>
-                </div>
-                <div class="featuresCard feature-card-feature-card">
-                  <img class="featuresIcon" src="public/features_icon_box.png" alt="Features Icon Bullet" height="32px">
-                  <div class="feature-card-container">
-                    <h3 class="feature-card-text">
-                      <span>Confirmation Notifications</span>
-                    </h3>
-                    <span class="bodySmall feature-card-text1">
-                      <span>Receive instant confirmation for your reservation</span>
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="home-reserve-your-table-now-section heroContainer">
-          <div class="home-container3">
-            <button type="button" class="home-button reserveTableButton Button">
-              <span class="home-reserve-your-table-now">&nbsp;Reserve Your Table Now&nbsp;</span>
-            </button>
-          </div>
-        </div>
-        <div class="home-banner1">
-          <div class="home-hero">
-            <div class="home-container4">
-              <h1 class="home-text04">Location</h1>
-                <span class="home-text05">
-                  We are located at&nbsp;<i>Emilio Aguinaldo Highway, Salitran, Dasmarinas, Cavite.</i><br/>
-                  <hr>
-                  Close landmarks are Shell and Caltex Gas Stations.
-                </span>
-                <a href="https://maps.app.goo.gl/hA5gLrBCk2EKRzFA8" target="_blank" rel="noreferrer noopener" class="home-link1 button">
-                  <span>
-                    <span class="home-text07 Button">Open Google Maps</span><br/>
-                  </span>
-                </a>
-            </div>
-            <div class="home-container4">
-              <h1 class="home-text04">Facebook</h1>
-                <span class="home-text05">
-                  You can message us at our Facebook Page for any inquiries and updates.<br/>
-                  <hr>
-                  Please check out our Facebook Page below.
-                </span>
-                <a href="https://www.facebook.com/bulaluhannikuyawill" target="_blank" rel="noreferrer noopener" class="home-link1 button">
-                  <span>
-                    <span class="home-text07 Button">Open Facebook</span><br/>
-                  </span>
-                </a>
-            </div>
-          </div>
-        </div> -->
       </div>
-      <div class="home-faq">
-        <div class="home-faq-container faqContainer">
-          <div class="home-faq1">
-            <!-- <div class="home-container5">
-              <span class="overline">
-                <span>FAQ</span><br/>
-              </span>
-              <h2 class="home-text12">Common questions</h2>
-              <span class="home-text13 bodyLarge">
-                <span>Here are some of the most common questions that we get.</span><br/>
-              </span>
-            </div>
-            <div class="home-container6">
-              <div class="question1-container">
-                <span class="question1-text">
-                  <span>How can I make a reservation?</span>
-                </span>
-                <span class="bodySmall">
-                  <span>You can make a reservation by filling out the reservation form on our website or by calling us directly.</span>
-                </span>
-              </div>
-              <div class="question1-container">
-                <span class="question1-text">
-                  <span>Is there a maximum number of guests for a reservation?</span>
-                </span>
-                <span class="bodySmall">
-                  <span>We can accommodate groups of up to 6 guests for a reservation. For larger groups, please contact us directly.</span>
-                </span>
-              </div>
-              <div class="question1-container">
-                <span class="question1-text">
-                  <span>Can I modify or cancel my reservation?</span>
-                </span>
-                <span class="bodySmall">
-                  <span>Yes, you can modify or cancel your reservation by contacting us at least 24 hours in advance.</span>
-                </span>
-              </div>
-              <div class="question1-container">
-                <span class="question1-text">
-                  <span>Do you accept walk-in customers?</span>
-                </span>
-                <span class="bodySmall">
-                  <span>Yes, we welcome walk-in customers. However, we recommend making a reservation to ensure availability.</span>
-                </span>
-              </div>
-              <div class="question1-container">
-                <span class="question1-text">
-                  <span>Is there a dress code for dining at your restaurant?</span>
-                </span>
-                <span class="bodySmall">
-                  <span>There is no strict dress code, but we recommend casual attire for a pleasant dining experience.</span>
-                </span>
-              </div>
-            </div> -->
-            <table class="table table-primary table-striped table-sm">
-              <thead>
-                <tr>
-                  <th scope="col">ID</th>
-                  <th scope="col">Registration Date</th>
-                  <th scope="col">Age</th>
-                  <th scope="col">Membership Start Date</th>
-                  <th scope="col">Occupation</th>
-                  <th scope="col">Salary</th>
-                  <th scope="col">Update</th>
-                  <th scope="col">Delete</th>
-                </tr>
-              </thead>
-              <tbody class="table-group-divider">
-                <?php
-                  $sql = "SELECT * FROM tbl_object ORDER BY ID DESC";
-                  $stmt = $conn->prepare($sql);
-                  $stmt->execute();
-                  while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
-                  {
-                      $ID = $row['ID'];
-                      $regDate = $row['regDate'];
-                      $age = $row['age'];
-                      $memDate = $row['memDate'];
-                      $Occupation = $row['Occupation'];
-                      $Salary = $row['Salary'];
-
-                      echo
-                          '<tr>
-                              <td>' . $ID . '</td>
-                              <td>' . $regDate . '</td>
-                              <td>' . $age . '</td>
-                              <td>' . $memDate . '</td>
-                              <td>' . $Occupation . '</td>
-                              <td>' . $Salary . '</td>
-                              <td>
-                                  <button class="btn btn-success"><a href="update.php?updateID=' . $ID . '" class="text-decoration-none text-light">Update</a></button>
-                              </td>
-                              <td>
-                                  <button class="btn btn-danger"><a href="delete.php?deleteID=' . $ID . '" class="text-decoration-none text-light">Delete</a></button>
-                              </td>
-                          </tr>';
-                  }
-                ?>
-              </tbody>
-            </table>
+      <?php
+        if ($Reservation_ID > 0)
+        {
+          echo '<div class="reserve-container-alert pb-1 pt-5 pt-0 mt-0 center-all"><div class="col-6 mx-auto">
+                  <div class="alert alert-success fade show h2" role="alert">
+                    <strong>Match found!</strong>
+                    <br/>Reservation ID: '. $Reservation_ID .'
+                  </div>
+                </div></div>';
+        }
+        if ($Reservation_ID === -1)
+        {
+          $Reservation_ID = 0;
+          echo '<div class="reserve-container-alert pb-1 pt-5 pt-0 mt-0 center-all"><div class="col-6 mx-auto">
+                  <div class="alert alert-danger fade show h2" role="alert">
+                    <strong>No match found!</strong>
+                    <br/>You do not have a reservation.
+                  </div>
+                </div></div>';
+        }
+      ?>
+      <div class="reserve-container center-all container-fluid p-5 d-flex align-items-center justify-content-center">
+        <form class="col-auto container text-center" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
+          <div class="row-1">
+            <label for="search" class="h5">Enter your Reservation Number</label>
+            <input type="number" class="form-control form-control-lg text-center" id="search" name="search" placeholder=" Reservation Number"><br>
           </div>
-        </div>
+          <button type="submit" class="btn btn-lg btn-success" name="submit" id="searchBtn">Search</button>
+        </form>
       </div>
       <div class="home-footer">
         <footer class="footerContainer home-footer1">
