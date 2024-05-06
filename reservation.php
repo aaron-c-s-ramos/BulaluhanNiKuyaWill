@@ -1,3 +1,63 @@
+<?php
+include_once("conn.php");
+include_once("functions.php");
+
+if ($_SERVER["REQUEST_METHOD"] == "POST")
+{
+    $name = test_input($_POST["name"]);
+    $age = test_input($_POST["age"]);
+    $gender = test_input($_POST["gender"]);
+    $bg_color_age_class = test_input($_POST["bg_color_age_class"]);
+    $bg_color_gender_class = test_input($_POST["bg_color_gender_class"]);
+    $text_color_age_class = test_input($_POST["text_color_age_class"]);
+    $text_color_gender_class = test_input($_POST["text_color_gender_class"]);
+
+    $name = fix_name($name);
+
+    if ($age < 18)
+    {
+        $bg_color_age_class = 'table-danger';
+        $text_color_age_class = 'text-white';
+    }
+    elseif ($age >= 18)
+    {
+        $bg_color_age_class = '';
+        $text_color_age_class = '';
+    }
+
+    if ($gender == 'Male')
+    {
+        $bg_color_gender_class = 'table-primary';
+        $text_color_gender_class = 'text-white';
+    }
+    elseif ($gender == 'Female')
+    {
+        $bg_color_gender_class = 'table-success';
+        $text_color_gender_class = 'text-white';
+    }
+
+    try {
+        $sql = "INSERT INTO tbl_activity5 (name, age, gender, bg_color_age_class, bg_color_gender_class, text_color_age_class, text_color_gender_class) 
+        VALUES (:name, :age, :gender, :bg_color_age_class, :bg_color_gender_class, :text_color_age_class, :text_color_gender_class)";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':name', $name);
+        $stmt->bindParam(':age', $age);
+        $stmt->bindParam(':gender', $gender);
+        $stmt->bindParam(':bg_color_age_class', $bg_color_age_class);
+        $stmt->bindParam(':bg_color_gender_class', $bg_color_gender_class);
+        $stmt->bindParam(':text_color_age_class', $text_color_age_class);
+        $stmt->bindParam(':text_color_gender_class', $text_color_gender_class);
+
+        $stmt->execute();
+    }
+    catch (Exception $e)
+    {
+        echo $sql . "<br>" . $e->getMessage();
+        echo $sql . "<br>" . $e->getTraceAsString();
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -81,7 +141,7 @@
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v19.0" nonce="p8H4x64l"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <div>
-      <link href="index.css" rel="stylesheet"/>
+      <link href="reservation.css" rel="stylesheet"/>
       <div class="home-container">
         <div class="home-header-section">
           <header data-thq="thq-navbar" class="home-navbar-interactive navbarContainer">
@@ -110,7 +170,7 @@
                     <div class="h-100 mb-auto overflow-y-auto p-3">
                       <ul class="navbar-nav text-center flex-grow-1 pe-3">
                         <li class="nav-link p-1 m-1 d-grid gap-2">
-                          <button type="button" class="btn btn-lg btn-success me-1" onclick="window.location.href='index.php';" aria-current="page">Home</button>
+                          <button type="button" class="btn btn-lg btn-success me-1" onclick="window.location.href='/';" aria-current="page">Home</button>
                         </li>
                         <li class="nav-link p-1 m-1 d-grid gap-2">
                           <button type="button" class="btn btn-lg btn-success me-1 text-nowrap" data-bs-toggle="modal" data-bs-target="#foodModal">Explore Menu</button>
@@ -139,7 +199,7 @@
         <div class="home-main-banner-section">
           <div id="MainBanner" class="home-banner bannerContainer"></div>
         </div>
-        <div class="modal fade" id="foodModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="foodModalLabel">
+        <!-- <div class="modal fade" id="foodModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="foodModalLabel">
           <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-full-screen">
             <div class="modal-content">
               <div class="modal-header d-flex justify-content-between">
@@ -268,12 +328,12 @@
                 </a>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
       <div class="home-faq">
         <div class="home-faq-container faqContainer">
           <div class="home-faq1">
-            <div class="home-container5">
+            <!-- <div class="home-container5">
               <span class="overline">
                 <span>FAQ</span><br/>
               </span>
@@ -323,7 +383,53 @@
                   <span>There is no strict dress code, but we recommend casual attire for a pleasant dining experience.</span>
                 </span>
               </div>
-            </div>
+            </div> -->
+            <table class="table table-primary table-striped table-sm">
+              <thead>
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Registration Date</th>
+                  <th scope="col">Age</th>
+                  <th scope="col">Membership Start Date</th>
+                  <th scope="col">Occupation</th>
+                  <th scope="col">Salary</th>
+                  <th scope="col">Update</th>
+                  <th scope="col">Delete</th>
+                </tr>
+              </thead>
+              <tbody class="table-group-divider">
+                <?php
+                  $sql = "SELECT * FROM tbl_object ORDER BY ID DESC";
+                  $stmt = $conn->prepare($sql);
+                  $stmt->execute();
+                  while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
+                  {
+                      $ID = $row['ID'];
+                      $regDate = $row['regDate'];
+                      $age = $row['age'];
+                      $memDate = $row['memDate'];
+                      $Occupation = $row['Occupation'];
+                      $Salary = $row['Salary'];
+
+                      echo
+                          '<tr>
+                              <td>' . $ID . '</td>
+                              <td>' . $regDate . '</td>
+                              <td>' . $age . '</td>
+                              <td>' . $memDate . '</td>
+                              <td>' . $Occupation . '</td>
+                              <td>' . $Salary . '</td>
+                              <td>
+                                  <button class="btn btn-success"><a href="update.php?updateID=' . $ID . '" class="text-decoration-none text-light">Update</a></button>
+                              </td>
+                              <td>
+                                  <button class="btn btn-danger"><a href="delete.php?deleteID=' . $ID . '" class="text-decoration-none text-light">Delete</a></button>
+                              </td>
+                          </tr>';
+                  }
+                ?>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>

@@ -29,13 +29,13 @@
 }
 .featuresContainer {
   flex: 0 0 auto;
-  color: #1A1A1A;
+  color: #1a1a1a;
   width: 100%;
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  background-color: #D6E3FE;
+  background-color: #d6e3fe;
 }
 .featuresCard {
   width: 100%;
@@ -48,7 +48,7 @@
   background-color: white;
 }
 .featuresIcon {
-  fill: #1A1A1A;
+  fill: #1a1a1a;
   width: 2rem;
   height: 2rem;
   flex-shrink: 0;
@@ -56,13 +56,13 @@
 }
 .faqContainer {
   flex: 0 0 auto;
-  color: #1A1A1A;
+  color: #1a1a1a;
   width: 100%;
   display: flex;
   align-items: center;
   flex-direction: row;
   justify-content: center;
-  background-color: #D6E3FE;
+  background-color: #d6e3fe;
 }
 .navbarContainer {
   width: 100%;
@@ -114,7 +114,7 @@
   background-color: white;
 }
 .socialIcons {
-  fill: #1A1A1A;
+  fill: #1a1a1a;
 }
 .overline {
   font-size: 12px;
