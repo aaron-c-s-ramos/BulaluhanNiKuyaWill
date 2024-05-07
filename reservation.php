@@ -2,36 +2,7 @@
 include_once("conn.php");
 include_once("functions.php");
 $Reservation_ID = 0;
-
-if (isset($_POST["submit"]))
-{
-    $search = $_POST['search'];
-
-    try
-    {
-        $sql = "SELECT * FROM current_reservations WHERE Reservation_ID = :Reservation_ID";
-
-        $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':Reservation_ID', $search, PDO::PARAM_INT);
-        $stmt->execute();
-        if ($stmt->rowCount() > 0)
-        {
-            $row = $stmt->fetch(PDO::FETCH_ASSOC);
-            if (is_array($row))
-            {
-            $Reservation_ID = $row['Reservation_ID'];
-            }
-        }
-        else
-        {
-            $Reservation_ID = -1;
-        }
-    } catch (Exception $e) {
-        echo $sql . "<br>" . $e->getMessage();
-        echo $sql . "<br>" . $e->getTraceAsString();
-    }
-    $conn = null;
-}
+include_once("searchResponse.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -43,67 +14,7 @@ if (isset($_POST["submit"]))
     <meta property="og:description" content="This is a table reservation website used for Bulaluhan ni Kuya Will restaurant with real-time updates of table availability."/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta property="twitter:card" content="summary_large_image"/>
-    <style data-tag="reset-style-sheet">
-      * {
-        box-sizing: border-box;
-        border-width: 0;
-        border-style: solid;
-      }
-
-      html {
-        line-height: 1.15;
-        scroll-behavior: smooth
-      }
-
-      body {
-        margin: 0;
-      }
-
-      p, li, ul, div, h1, h2, h3, h5, blockquote {
-        margin: 0;
-        padding: 0;
-      }
-
-      button {
-        background-color: transparent;
-        text-transform: none;
-        font-family: inherit;
-        line-height: 1.15;
-        font-size: 100%;
-        margin: 0;
-      }
-
-      button, [type="button"], [type="reset"], [type="submit"] {
-        -webkit-appearance: button;
-        appearance: button;
-      }
-
-      a {
-        color: inherit;
-        text-decoration: inherit;
-      }
-
-      img {
-        display: block;
-      }
-    </style>
-    <style data-tag="default-style-sheet">
-      html {
-        font-family: "Inter";
-        font-size: 16px;
-      }
-
-      body {
-        font-weight: 350;
-        font-style: normal;
-        text-decoration: none;
-        text-transform: none;
-        letter-spacing: normal;
-        line-height: 1.15;
-        color: black;
-        background-color: white;
-      }
-    </style>
+    <?php include_once("resetDefaultStyle.php"); ?>
     <link rel="stylesheet" href="https://unpkg.com/animate.css@4.1.1/animate.css"/>
     <link rel="shortcut icon" href="public/favicon.ico" type="icon/png" sizes="32x32"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&amp;display=swap" data-tag="font"/>
@@ -216,22 +127,26 @@ if (isset($_POST["submit"]))
       <?php
         if ($Reservation_ID > 0)
         {
-          echo '<div class="reserve-container-alert pb-1 pt-5 pt-0 mt-0 center-all"><div class="col-6 mx-auto">
-                  <div class="alert alert-success fade show h2" role="alert">
-                    <strong>Match found!</strong>
-                    <br/>Reservation ID: '. $Reservation_ID .'
+          echo '<div class="reserve-container-alert pb-1 pt-5 pt-0 mt-0 center-all">
+                  <div class="col-6 mx-auto">
+                    <div class="alert alert-success fade show h2" role="alert">
+                      <strong>Match found!</strong>
+                      <br/>Reservation ID: '. $Reservation_ID .'
+                    </div>
                   </div>
-                </div></div>';
+                </div>';
         }
         if ($Reservation_ID === -1)
         {
           $Reservation_ID = 0;
-          echo '<div class="reserve-container-alert pb-1 pt-5 pt-0 mt-0 center-all"><div class="col-6 mx-auto">
-                  <div class="alert alert-danger fade show h2" role="alert">
-                    <strong>No match found!</strong>
-                    <br/>You do not have a reservation.
+          echo '<div class="reserve-container-alert pb-1 pt-5 pt-0 mt-0 center-all">
+                  <div class="col-6 mx-auto">
+                    <div class="alert alert-danger fade show h2" role="alert">
+                      <strong>No match found!</strong>
+                      <br/>You do not have a reservation.
+                    </div>
                   </div>
-                </div></div>';
+                </div>';
         }
       ?>
       <div class="reserve-container center-all container-fluid p-5 d-flex align-items-center justify-content-center">
@@ -242,6 +157,7 @@ if (isset($_POST["submit"]))
           </div>
           <button type="submit" class="btn btn-lg btn-success" name="submit" id="searchBtn">Search</button>
         </form>
+      </div>
       </div>
       <div class="home-footer">
         <footer class="footerContainer home-footer1">
@@ -255,6 +171,15 @@ if (isset($_POST["submit"]))
           </div>
         </footer>
       </div>
+      <script type="text/javascript">
+        document.getElementById('triggerButton').addEventListener('click', function () {
+            var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+            var toastList = toastElList.map(function (toastEl) {
+                return new bootstrap.Toast(toastEl)
+            })
+            toastList.forEach(toast => toast.show())
+        })
+      </script>
     </div>
   </body>
 </html>

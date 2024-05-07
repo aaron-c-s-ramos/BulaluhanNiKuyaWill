@@ -8,67 +8,7 @@
     <meta property="og:description" content="This is a table reservation website used for Bulaluhan ni Kuya Will restaurant with real-time updates of table availability."/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta property="twitter:card" content="summary_large_image"/>
-    <style data-tag="reset-style-sheet">
-      * {
-        box-sizing: border-box;
-        border-width: 0;
-        border-style: solid;
-      }
-
-      html {
-        line-height: 1.15;
-        scroll-behavior: smooth
-      }
-
-      body {
-        margin: 0;
-      }
-
-      p, li, ul, div, h1, h2, h3, h5, blockquote {
-        margin: 0;
-        padding: 0;
-      }
-
-      button {
-        background-color: transparent;
-        text-transform: none;
-        font-family: inherit;
-        line-height: 1.15;
-        font-size: 100%;
-        margin: 0;
-      }
-
-      button, [type="button"], [type="reset"], [type="submit"] {
-        -webkit-appearance: button;
-        appearance: button;
-      }
-
-      a {
-        color: inherit;
-        text-decoration: inherit;
-      }
-
-      img {
-        display: block;
-      }
-    </style>
-    <style data-tag="default-style-sheet">
-      html {
-        font-family: "Inter";
-        font-size: 16px;
-      }
-
-      body {
-        font-weight: 350;
-        font-style: normal;
-        text-decoration: none;
-        text-transform: none;
-        letter-spacing: normal;
-        line-height: 1.15;
-        color: black;
-        background-color: white;
-      }
-    </style>
+    <?php include_once("resetDefaultStyle.php"); ?>
     <link rel="stylesheet" href="https://unpkg.com/animate.css@4.1.1/animate.css"/>
     <link rel="shortcut icon" href="public/favicon.ico" type="icon/png" sizes="32x32"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&amp;display=swap" data-tag="font"/>
