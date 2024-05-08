@@ -64,18 +64,6 @@
   justify-content: center;
   background-color: #d6e3fe;
 }
-.navbarContainer {
-  width: 100%;
-  display: flex;
-  position: sticky;
-  align-items: center;
-  padding-top: var(--pixels-24);
-  padding-left: var(--pixels-48);
-  padding-right: var(--pixels-48);
-  padding-bottom: var(--pixels-24);
-  justify-content: space-between;
-  background-color: white;
-}
 .heroContainer {
   width: 100%;
   display: flex;
@@ -113,18 +101,8 @@
   justify-content: space-between;
   background-color: white;
 }
-.socialIcons {
-  fill: #1a1a1a;
-}
 .overline {
   font-size: 12px;
-  font-family: "Open Sans", sans-serif;
-  font-weight: 700;
-  line-height: 150%;
-  text-transform: uppercase;
-}
-.logo {
-  font-size: 2em;
   font-family: "Open Sans", sans-serif;
   font-weight: 700;
   line-height: 150%;
@@ -148,4 +126,7 @@
   align-items: center;
   text-align: center;
   align-self: center;
+}
+.carousel.pointer-event {
+  touch-action: pan-y pinch-zoom;
 }

@@ -1,7 +1,7 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["submit"]))
 {
-    $search = fix_name(clean_input($_POST['search']));
+    $search = clean_input($_POST['search']);
 
     try
     {

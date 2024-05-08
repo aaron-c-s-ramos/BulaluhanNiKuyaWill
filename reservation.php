@@ -1,8 +1,8 @@
 <?php
-include_once("conn.php");
-include_once("functions.php");
+require_once("conn.php");
+require_once("functions.php");
 $Reservation_ID = 0;
-include_once("searchResponse.php");
+require_once("searchResponse.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -29,59 +29,7 @@ include_once("searchResponse.php");
     <div>
       <link href="reservation.css" rel="stylesheet"/>
       <div class="home-container">
-        <div class="home-header-section">
-          <header data-thq="thq-navbar" class="home-navbar-interactive navbarContainer">
-            <div data-thq="thq-navbar-nav" class="home-desktop-menu">
-              <a href="#MainBanner" class="home-home-name">
-                <span class="home-text logo text-dark">Bulaluhan ni Kuya Will</span><br/>
-              </a>
-              <div class="home-btn-group">
-                <button type="button" class="btn btn-lg btn-success me-1" onclick="window.location.href='/';" aria-current="page">Home</button>
-                <button type="button" class="btn btn-lg btn-success me-1 text-nowrap" data-bs-toggle="modal" data-bs-target="#foodModal">Explore Menu</button>
-                <button type="button" class="btn btn-lg btn-success me-1 text-nowrap" onclick="window.location.href='/reservation.php';">View Reservations</button>
-                <button type="button" class="btn btn-lg btn-success me-1 text-nowrap" onclick="window.location.href='/';">Book A Table</button>
-              </div>
-            </div>
-            <div data-thq="thq-burger-menu" class="home-burger-menu">
-              <button class="btn btn-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu" aria-controls="mobileMenu">
-                <img class="home-icon socialIcons" src="public/mobile_menu.png" alt="Drop Down Menu" loading="lazy">
-              </button>
-              <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileMenu" aria-labelledby="mobileMenuLabel">
-                <div class="offcanvas-header">
-                  <h5 class="offcanvas-title" id="mobileMenuLabel">Bulaluhan Ni Kuya Will</h5>
-                  <button type="button" class="btn btn-lg btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                </div>
-                <div class="offcanvas-body p-0">
-                  <div class="d-flex flex-align-start flex-column h-100">
-                    <div class="h-100 mb-auto overflow-y-auto p-3">
-                      <ul class="navbar-nav text-center flex-grow-1 pe-3">
-                        <li class="nav-link p-1 m-1 d-grid gap-2">
-                          <button type="button" class="btn btn-lg btn-success me-1" onclick="window.location.href='/';" aria-current="page">Home</button>
-                        </li>
-                        <li class="nav-link p-1 m-1 d-grid gap-2">
-                          <button type="button" class="btn btn-lg btn-success me-1 text-nowrap" data-bs-toggle="modal" data-bs-target="#foodModal">Explore Menu</button>
-                        </li>
-                        <li class="nav-link p-1 m-1 d-grid gap-2">
-                          <button type="button" class="btn btn-lg btn-success me-1" onclick="window.location.href='/reservation.php';">View Reservations</button>
-                        </li>
-                        <li class="nav-link p-1 m-1 d-grid gap-2">
-                          <button type="button" class="btn btn-lg btn-success me-1" onclick="window.location.href='/';">Book A Table</button>
-                        </li>
-                      </ul>
-                    </div>
-                    <div class="d-flex justify-content-center">
-                      <div class="align-self-center p-3">
-                        <a href="https://www.facebook.com/bulaluhannikuyawill" target="_blank" rel="noreferrer noopener" class="home-link2">
-                          <img src="public/fb_icon_dark.png" alt="Facebook Page" width="23px" height="39px" loading="lazy">
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </header>
-        </div>
+        <?php require_once("navBar.php"); ?>
         <div class="home-main-banner-section">
           <div id="MainBanner" class="home-banner bannerContainer"></div>
         </div>
@@ -171,15 +119,6 @@ include_once("searchResponse.php");
           </div>
         </footer>
       </div>
-      <script type="text/javascript">
-        document.getElementById('triggerButton').addEventListener('click', function () {
-            var toastElList = [].slice.call(document.querySelectorAll('.toast'))
-            var toastList = toastElList.map(function (toastEl) {
-                return new bootstrap.Toast(toastEl)
-            })
-            toastList.forEach(toast => toast.show())
-        })
-      </script>
     </div>
   </body>
 </html>

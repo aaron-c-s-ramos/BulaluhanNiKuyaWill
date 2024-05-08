@@ -34,8 +34,8 @@
     img {
         display: block;
     }
-    </style>
-    <style data-tag="default-style-sheet">
+</style>
+<style data-tag="default-style-sheet">
     html {
         font-family: "Inter";
         font-size: 16px;
@@ -50,4 +50,4 @@
         color: black;
         background-color: white;
     }
-    </style>
+</style>
