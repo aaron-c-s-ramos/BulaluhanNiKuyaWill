@@ -77,17 +77,13 @@
   justify-content: center;
   background-color: white;
 }
-.bannerContainer {
+.main-banner {
   width: 100%;
-  display: flex;
-  align-items: center;
-  padding-top: 96px;
-  padding-left: 80px;
-  padding-right: 80px;
-  flex-direction: column;
-  padding-bottom: 96px;
-  justify-content: space-between;
-  background-color: white;
+  height: 55vh;
+  margin-top: 3.9rem;
+  background-size: cover;
+  background-image: url("public/main_cover-1500w.webp");
+  background-position: center;
 }
 .footerContainer {
   width: 100%;
