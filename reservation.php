@@ -53,7 +53,7 @@
       ?>
       <!-- Reservation search form -->
       <div class="reserve-container center-all container-fluid d-flex align-items-center justify-content-center">
-        <form class="col-auto container text-center" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
+        <form class="col-auto container text-center" action="<?php echo htmlspecialchars($_SERVER["REQUEST_URI"]);?>" method="POST">
           <label for="search" class="h5">Enter your Reservation Number</label>
           <input type="number" class="form-control form-control-lg text-center" id="search" name="search" placeholder=" Reservation Number">
           <button type="submit" class="btn btn-lg btn-success mt-3" name="submit" id="searchBtn">Search</button>
@@ -64,5 +64,7 @@
     </div>
     <!-- Bootstrap JavaScript bundle for handling UI components -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js" integrity="sha512-7Pi/otdlbbCR+LnW+F7PwFcSDJOuUJB3OxtEHbg4vSMvzvJjde4Po1v4BR9Gdc9aXNUNFVUY+SK51wWT8WF0Gg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://unpkg.com/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>

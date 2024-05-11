@@ -2,9 +2,9 @@
 // Define the server name, port, username, password, and database name
 $servername = "localhost"; // The server where the database is hosted
 $port = 3307; // The port number on which the database server is listening
-$username = "root"; // The username for database access
-$password = ""; // The password for database access
-$dbName = "bulaluhan_ni_kuya_will"; // The name of the database to connect to
+$username = "id22124684_root"; // The username for database access
+$password = "KUYAWILLbulaluhan1!"; // The password for database access
+$dbName = "id22124684_bulaluhan_ni_kuya_will"; // The name of the database to connect to
 
 try
 {
@@ -35,7 +35,7 @@ catch (Exception $e)
                 });
             </script>
             <div class="modal fade" id="errorModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="errorModalLabel">
-                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
                     <div class="modal-content">
                         <div class="modal-header d-flex justify-content-center">
                             <svg class="bi flex-shrink-0 me-2" width="1.5rem" height="1.5rem" role="img" aria-label="Danger:" viewBox="0 0 16 16">

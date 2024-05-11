@@ -33,11 +33,61 @@
           </div>
         </div>
       </div>
-      <!-- Modal footer with navigation buttons -->
-      <div class="modal-footer justify-content-evenly">
-        <button class="btn btn-lg btn-dark" type="button" data-bs-target="#foodMenu" data-bs-slide="prev">Previous</button>
-        <button class="btn btn-lg btn-dark" type="button" data-bs-target="#foodMenu" data-bs-slide="next">Next</button>
+      <!-- Modal footer with navigation buttons and pagination -->
+      <div class="modal-footer justify-content-center">
+        <nav aria-label="Food Menu Navigation">
+          <ul class="pagination pagination-lg rounded">
+            <li>
+              <a class="page-link btn rounded-0 rounded-start text-black" type="button" role="button" data-bs-target="#foodMenu" data-bs-slide="prev" title="Previous">Previous</a>
+            </li>
+            <li class="page-item active">
+              <a class="page-link btn rounded-0 text-white" type="button" role="button" data-bs-target="#foodMenu" data-bs-slide-to="0" title="Food Menu 1">1</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link btn rounded-0 text-black" type="button" role="button" data-bs-target="#foodMenu" data-bs-slide-to="1" title="Food Menu 2">2</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link btn rounded-0 text-black" type="button" role="button" data-bs-target="#foodMenu" data-bs-slide-to="2" title="Food Menu 3">3</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link btn rounded-0 text-black" type="button" role="button" data-bs-target="#foodMenu" data-bs-slide-to="3" title="Food Menu 4">4</a>
+            </li>
+            <li>
+              <a class="page-link btn rounded-0 rounded-end text-black" type="button" role="button" data-bs-target="#foodMenu" data-bs-slide="next" title="Next">Next</a>
+            </li>
+          </ul>
+        </nav>
       </div>
     </div>
   </div>
 </div>
+<!-- Synchronizes carousel pagination with active slide on slide change -->
+<script type="text/javascript">
+  document.addEventListener('DOMContentLoaded', function()
+  {
+    var foodMenu = document.getElementById('foodMenu');
+    foodMenu.addEventListener('slid.bs.carousel', function ()
+    {
+      var carouselItems = document.querySelectorAll('.carousel-item');
+      var pageItems = document.querySelectorAll('.pagination .page-item');
+      var pageLinks = document.querySelectorAll('.pagination .page-link');
+      for (var i = 0; i < carouselItems.length; i++)
+      {
+        if (carouselItems[i].classList.contains('active'))
+        {
+          for (var j = 0; j < pageItems.length; j++)
+          {
+            pageItems[j].classList.remove('active');
+            pageLinks[j+1].classList.remove('text-white');
+            pageLinks[j+1].classList.add('text-black');
+          }
+          pageItems[i].classList.add('active');
+          pageLinks[i+1].classList.remove('text-black');
+          pageLinks[i+1].classList.add('text-white');
+          
+        }
+      }
+      
+    });
+  });
+</script>
