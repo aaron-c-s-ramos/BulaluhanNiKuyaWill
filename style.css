@@ -77,13 +77,22 @@
   justify-content: center;
   background-color: white;
 }
-.main-banner {
+.mainBanner,
+.bgImage,
+.loading {
+  background-size: cover;
+  background-position: center;
+}
+.mainBanner,
+.bgImage {
   width: 100%;
   height: 55vh;
+}
+.mainBanner {
   margin-top: 3.9rem;
-  background-size: cover;
+}
+.bgImage {
   background-image: url("public/main_cover-1500w.webp");
-  background-position: center;
 }
 .footerContainer {
   width: 100%;
