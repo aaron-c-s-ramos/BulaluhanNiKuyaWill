@@ -21,10 +21,10 @@
           <div class="offcanvas-body">
             <!-- Navigation links within the off-canvas menu -->
             <div class="navbar-nav justify-content-center flex-grow-1">
-              <button type="button" class="btn btn-lg btn-success me-1 mt-3 mb-3" onclick="window.location.href='/';">Home</button>
+              <a href="/" type="button" class="btn btn-lg btn-success me-1 mt-3 mb-3">Home</a>
               <button type="button" class="btn btn-lg btn-success me-1 text-nowrap mt-3 mb-3" data-bs-toggle="modal" data-bs-target="#foodModal">Explore Menu</button>
-              <button type="button" class="btn btn-lg btn-success me-1 text-nowrap mt-3 mb-3" onclick="window.location.href='reservation.php';">View Reservations</button>
-              <button type="button" class="btn btn-lg btn-success me-1 text-nowrap mt-3 mb-3" onclick="window.location.href='bookTable.php';">Book A Table</button>
+              <a href="reservation.php" type="button" class="btn btn-lg btn-success me-1 text-nowrap mt-3 mb-3">View Reservations</a>
+              <a href="bookTable.php#bookingForm" type="button" class="btn btn-lg btn-success me-1 text-nowrap mt-3 mb-3">Book A Table</a>
             </div>
           </div>
         </div>
