@@ -135,3 +135,21 @@
 .carousel.pointer-event {
   touch-action: pan-y pinch-zoom;
 }
+#scrollToTopBtn {
+  display: none;
+  position: fixed;
+  bottom: 75px;
+  right: 75px;
+  z-index: 100;
+  border: none;
+  outline: none;
+  background-color: green;
+  color: white;
+  cursor: pointer;
+  padding: 1.5rem;
+  border-radius: 50%;
+}
+#scrollToTopBtn:hover {
+  background-color: lightgreen;
+  color: black;
+}
