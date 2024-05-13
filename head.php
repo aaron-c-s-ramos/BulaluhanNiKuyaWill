@@ -20,7 +20,7 @@
 <meta property="twitter:card" content="summary_large_image"/>
 
 <!-- Include PHP file to reset default styles -->
-<?php include_once("resetDefaultStyle.php");?>
+<?php include_once("styles/resetDefaultStyle.php");?>
 
 <!-- Link to favicon -->
 <link rel="icon" href="public/favicon.ico" type="icon/ico" sizes="256x256"/>
@@ -40,4 +40,4 @@
 <link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.3/dist/css/bootstrap.min.css"/>
 
 <!-- Custom Global stylesheet -->
-<link rel="stylesheet" href="style.css"/>
+<link rel="stylesheet" href="styles/style.css" title="…"/>

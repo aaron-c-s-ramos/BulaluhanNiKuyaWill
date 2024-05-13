@@ -100,7 +100,7 @@
   display: flex;
   background-size: cover;
   background-color: transparent;
-  background-image: url("public/table_cover-1500w.webp");
+  background-image: url("../public/table_cover-1500w.webp");
   background-position: center;
 }
 .home-container3 {
