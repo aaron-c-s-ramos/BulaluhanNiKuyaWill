@@ -3,32 +3,39 @@
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["submit"]))
 {
   // Clean the input to prevent SQL injection
-  $search = clean_input($_POST['search']);
-  try
-  {
-    // Prepare SQL query to select reservation by ID
-    $sql = "SELECT * FROM current_reservations WHERE Reservation_ID = :Reservation_ID";
+  $Reservation_ID = clean_input($_POST['Reservation_ID']);
+  $Customer_Phone = clean_input($_POST['Customer_Phone']);
+  try {
+    // Prepare SQL query to select reservation by last name
+    $sql  = "SELECT * FROM current_reservations WHERE Reservation_ID = :Reservation_ID AND Customer_Phone = :Customer_Phone";
     $stmt = $conn->prepare($sql);
     // Bind the parameter to the prepared statement
-    $stmt->bindParam(':Reservation_ID', $search, PDO::PARAM_INT);
+    $stmt->bindParam(':Reservation_ID', $Reservation_ID, PDO::PARAM_INT);
+    $stmt->bindParam(':Customer_Phone', $Customer_Phone, PDO::PARAM_INT);
     // Execute the query
     $stmt->execute();
     // Check if any rows were returned
-    if ($stmt->rowCount() > 0)
-    {
+    if ($stmt->rowCount() > 0) {
       // Fetch the first row as an associative array
       $row = $stmt->fetch(PDO::FETCH_ASSOC);
       // Check if the fetched row is an array
-      if (is_array($row))
-      {
-        // Assign the Reservation_ID to a variable
+      if (is_array($row)) {
+        // Assign the fetched values to variables
         $Reservation_ID = $row['Reservation_ID'];
+        $Customer_First_Name = $row['Customer_First_Name'];
+        $Customer_Last_Name = $row['Customer_Last_Name'];
+        $Number_Of_Guests = $row['Number_Of_Guests'];
+        $Customer_Phone = $row['Customer_Phone'];
+        $Reservation_Date = $row['Reservation_Date'];
+        $Reservation_Time = $row['Reservation_Time'];
+        $Status = $row['Status'];
+        $Submitted_Reservation = $row['Submitted_Reservation'];
       }
-    }
-    else
-    {
-      // Set Reservation_ID to -1 if no match found
-      $Reservation_ID = -1;
+      else
+      {
+        // Debugging message
+        echo '<script>console.log("No matching reservation found.");</script>';
+      }
     }
   }
   catch (Exception $e)
@@ -74,6 +81,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["submit"]))
               echo '  <span class="center-all">
                           Please save this message and contact the developer.<br>
                           <button class="btn btn-lg btn-secondary text-nowrap mt-3 mb-2" onclick="downloadError(\'forScreenshot\')">Download Message</button>
+                          <button type="button" class="btn btn-lg btn-danger mt-3 mb-3" data-bs-dismiss="modal" aria-label="Close">Close</button>
                       </span>
             </div>
           </div>

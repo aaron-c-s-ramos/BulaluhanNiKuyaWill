@@ -36,8 +36,6 @@
                     <form class="row g-3" method="POST" action="<?php echo htmlspecialchars($_SERVER["REQUEST_URI"]); ?>">
                       <span class="font-monospace fst-italic text-danger">*&nbsp;required field</span><br>
                       <input type="hidden" class="d-none" id="Reservation_ID" name="Reservation_ID" autocomplete="off" hidden>
-                      <!-- <input type="hidden" class="d-none" id="Status" name="Status" autocomplete="off" hidden> -->
-                      <!-- <input type="hidden" class="d-none" id="Submitted_Reservation" name="Submitted_Reservation" autocomplete="off" hidden> -->
                       <div class="col-md-6">
                         <label for="Customer_First_Name" class="form-label col-form-label-lg" title="ex. John">
                           First Name&nbsp;<span class="font-monospace fst-italic small text-danger">*</span>
@@ -66,23 +64,23 @@
                         <span class="font-monospace fst-italic small text-danger"></span>
                       </div>
                       <div class="col-md-6">
-                        <label for="Customer_Phone" class="form-label col-form-label-lg" title="ex. 09767573727">
+                        <label for="Customer_Phone" class="form-label col-form-label-lg" title="ex. 9767573727">
                           Phone Number&nbsp;<span class="font-monospace fst-italic small text-danger">*</span></label>
-                        <input type="tel" class="form-control form-control-lg border border-secondary-subtle" id="Customer_Phone" placeholder="Phone Number" aria-label="Phone Number" name="Customer_Phone" autocomplete="off" maxlength="11" minlength="11" pattern="[0-9]{11}" title="ex. 09767573727" value="" required>
+                        <input type="number" class="form-control form-control-lg border border-secondary-subtle" id="Customer_Phone" placeholder="Phone Number" aria-label="Phone Number" name="Customer_Phone" autocomplete="off" maxlength="11" minlength="10" title="ex. 9767573727" value="" required>
                         <span class="font-monospace fst-italic small text-danger">
                         </span>
                       </div>
                       <div class="col-md-6 center-all">
                         <label for="Reservation_Date" class="form-label col-form-label-lg">
                           Date&nbsp;<span class="font-monospace fst-italic small text-danger">*</span></label>
-                        <input type="date" class="form-control form-control-lg border border-secondary-subtle" id="Reservation_Date" aria-label="Date" name="Reservation_Date" autocomplete="off" min="2024-05-13" max="2024-12-21" value="currentDate" pattern="\d{4}-\d{2}-\d{2}" onclick="getCurrentDate(); this.onclick=null;" required>
+                        <input type="date" class="form-control form-control-lg border border-secondary-subtle" id="Reservation_Date" aria-label="Date" name="Reservation_Date" autocomplete="off" min="2024-05-13" max="2024-12-21" value="" pattern="\d{4}-\d{2}-\d{2}" onclick="getCurrentDate()" required>
                         <span class="font-monospace fst-italic small text-danger" >
                         </span>
                       </div>
                       <div class="col-md-6 center-all">
                         <label for="Reservation_Time" class="form-label col-form-label-lg">
                           Time&nbsp;<span class="font-monospace fst-italic small text-danger">*</span></label>
-                        <input type="time" class="form-control form-control-lg border border-secondary-subtle" id="Reservation_Time" aria-label="Time" name="Reservation_Time" autocomplete="off" onclick="getCurrentTime(); this.onclick=null;" step="300" pattern="[0-9]{2}:[0-9]{2}" required>
+                        <input type="time" class="form-control form-control-lg border border-secondary-subtle" id="Reservation_Time" aria-label="Time" name="Reservation_Time" autocomplete="off" onclick="getCurrentTime()" step="300" pattern="[0-9]{2}:[0-9]{2}" value="" required>
                         <span class="font-monospace fst-italic small text-danger">
                         </span>
                       </div>

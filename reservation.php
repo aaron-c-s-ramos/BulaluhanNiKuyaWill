@@ -7,13 +7,13 @@
     <?php
     require_once("dB/conn.php");
     require_once("dB/functions.php");
-    $Reservation_ID = 0;
+    require_once ("dB/searchValues.php");
     require_once("dB/searchResponse.php");
     ?>
     <!-- Link to the main stylesheet for this page -->
     <link href="styles/reservation.css" rel="stylesheet"/>
   </head>
-  <body>
+  <body onload="document.getElementById('viewBooking').scrollIntoView({behavior:'smooth'})">
     <div>
       <!-- Navigation bar included from a separate PHP file -->
       <?php require_once("navBar.php");?>
@@ -26,41 +26,77 @@
         <!-- Food menu modal included from a separate PHP file -->
         <?php require_once("foodMenuModal.php");?>
       </div>
-      <!-- Conditional display alert message based on Reservation_ID -->
-      <?php
-        // Display success message if Reservation_ID is greater than 0
-        if ($Reservation_ID > 0)
-        {
-          echo '<div class="reserve-container-alert pb-1 pt-5 pt-0 mt-0 center-all">
-                  <div class="col-6 mx-auto">
-                    <div class="alert alert-success fade show h2" role="alert">
-                      <strong>Match found!</strong>
-                      <br/>Reservation ID: '. $Reservation_ID.'
-                    </div>
-                  </div>
-                </div>';
-        }
-        // Display error message if Reservation_ID is -1
-        if ($Reservation_ID === -1)
-        {
-          $Reservation_ID = 0;
-          echo '<div class="reserve-container-alert pb-1 pt-5 pt-0 mt-0 center-all">
-                  <div class="col-6 mx-auto">
-                    <div class="alert alert-danger fade show h2" role="alert">
-                      <strong>No match found!</strong>
-                      <br/>You do not have a reservation.
-                    </div>
-                  </div>
-                </div>';
-        }
-      ?>
       <!-- Reservation search form -->
       <div class="reserve-container center-all container-fluid d-flex align-items-center justify-content-center">
-        <form class="col-auto container text-center" action="<?php echo htmlspecialchars($_SERVER["REQUEST_URI"]);?>" method="POST">
-          <label for="search" class="h5">Enter your Reservation Number</label>
-          <input type="number" class="form-control form-control-lg text-center" id="search" name="search" placeholder=" Reservation Number">
-          <button type="submit" class="btn btn-lg btn-success mt-3" name="submit" id="searchBtn">Search</button>
-        </form>
+        <div class="container-fluid formContainer" id="viewBooking">
+          <div class="row justify-content-center">
+            <div class="col-md-6">
+              <div class="container-fluid">
+                <div class="card container p-5 my-5 rounded-5 text-dark text-center">
+                  <div class="card-body rounded-5 border border-secondary-subtle">
+                    <h2 class="card-title p-0 pb-2 m-0 display-5">Reservation Checking</h2><hr>
+                    <div class="p-3 m-3">
+                      <div class="row g-3">
+                        <form class="text-center" action="<?php echo htmlspecialchars($_SERVER["REQUEST_URI"]); ?>" method="POST">
+                          <span class="font-monospace fst-italic text-danger">*&nbsp;required field</span><br>
+                          <div>
+                            <label for="Reservation_ID" class="form-label col-form-label-lg">
+                              Reservation ID&nbsp;<span class="font-monospace fst-italic small text-danger">*</span></label>
+                            <input type="number" class="form-control form-control-lg border border-secondary-subtle" id="Reservation_ID" placeholder="Reservation ID" aria-label="Reservation ID" name="Reservation_ID" required>
+                          </div>
+                          <div>
+                            <label for="Customer_Phone" class="form-label col-form-label-lg">
+                              Phone Number&nbsp;<span class="font-monospace fst-italic small text-danger">*</span></label>
+                            <input type="number" class="form-control form-control-lg border border-secondary-subtle mb-2" id="Customer_Phone" placeholder="Phone Number" aria-label="Phone Number" name="Customer_Phone" maxlength="11" minlength="10" required>
+                          </div>
+                          <div>
+                            <button type="submit" class="btn btn-lg btn-success mt-3 mb-1" name="submit" id="submit">Search</button>
+                          </div>
+                        </form>
+                          <div>
+                            <label for="Reservation_ID" class="form-label col-form-label-lg">Reservation ID</label>
+                            <input type="number" class="form-control form-control-lg border border-secondary-subtle" id="Reservation_ID" placeholder="Reservation ID" aria-label="Reservation ID" name="Reservation_ID" value="<?php echo $Reservation_ID; ?>" readonly>
+                          </div>
+                          <div>
+                            <label for="Status" class="form-label col-form-label-lg">Status</label>
+                            <input type="text" class="form-control form-control-lg border border-secondary-subtle" id="Status" placeholder="Status" aria-label="Status" name="Status" value="<?php echo $Status; ?>" readonly>
+                          </div>
+                          <div>
+                            <label for="Customer_First_Name" class="form-label col-form-label-lg">First Name</label>
+                            <input type="text" class="form-control form-control-lg border border-secondary-subtle" id="Customer_First_Name" placeholder="First Name" aria-label="First Name" name="Customer_First_Name" value="<?php echo $Customer_First_Name; ?>" readonly>
+                          </div>
+                          <div>
+                            <label for="Customer_Last_Name" class="form-label col-form-label-lg">Last Name</label>
+                            <input type="text" class="form-control form-control-lg border border-secondary-subtle" id="Customer_Last_Name" placeholder="Last Name" aria-label="Last Name" name="Customer_Last_Name" value="<?php echo $Customer_Last_Name; ?>" readonly>
+                          </div>
+                          <div>
+                            <label for="Number_Of_Guests" class="form-label col-form-label-lg">Guest Quantity</label>
+                            <input type="number" class="form-control form-control-lg border border-secondary-subtle" id="Number_Of_Guests" placeholder="Number of Guests" aria-label="- Number of Guests -" name="Number_Of_Guests" value="<?php echo $Number_Of_Guests; ?>" readonly>
+                          </div>
+                          <div>
+                            <label for="Customer_Phone" class="form-label col-form-label-lg">Phone Number</label>
+                            <input type="tel" class="form-control form-control-lg border border-secondary-subtle" id="Customer_Phone" placeholder="Phone Number" aria-label="Phone Number" name="Customer_Phone" value="<?php echo $Customer_Phone; ?>" readonly>
+                          </div>
+                          <div>
+                            <label for="Reservation_Date" class="form-label col-form-label-lg">Date</label>
+                            <input type="date" class="form-control form-control-lg border border-secondary-subtle" id="Reservation_Date" aria-label="Date" name="Reservation_Date" value="<?php echo $Reservation_Date; ?>" readonly>
+                          </div>
+                          <div>
+                            <label for="Reservation_Time" class="form-label col-form-label-lg">Time</label>
+                            <input type="time" class="form-control form-control-lg border border-secondary-subtle" id="Reservation_Time" aria-label="Time" name="Reservation_Time" value="<?php echo $Reservation_Time; ?>" readonly>
+                          </div>
+                          <div>
+                            <label for="Submitted_Reservation" class="form-label col-form-label-lg">Submitted On</label>
+                            <input type="datetime-local" class="form-control form-control-lg border border-secondary-subtle" id="Submitted_Reservation" aria-label="Submitted Reservation Date" name="Submitted_Reservation" value="<?php echo $Submitted_Reservation; ?>" readonly>
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <button type="button" onclick="scrollToTop()" id="scrollToTopBtn" title="Return to top">
         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
