@@ -24,7 +24,7 @@
               <a href="/" type="button" class="btn btn-lg btn-success me-1 mt-3 mb-3">Home</a>
               <button type="button" class="btn btn-lg btn-success me-1 text-nowrap mt-3 mb-3" data-bs-toggle="modal" data-bs-target="#foodModal">Explore Menu</button>
               <a href="reservation.php" type="button" class="btn btn-lg btn-success me-1 text-nowrap mt-3 mb-3">View Reservations</a>
-              <a href="bookTable.php#bookingForm" type="button" class="btn btn-lg btn-success me-1 text-nowrap mt-3 mb-3">Book A Table</a>
+              <a href="bookTable.php" type="button" class="btn btn-lg btn-success me-1 text-nowrap mt-3 mb-3">Book A Table</a>
             </div>
           </div>
         </div>

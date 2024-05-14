@@ -2,16 +2,17 @@
 <html lang="en">
   <head>
     <!-- Include common head elements from a separate PHP file -->
-    <?php require_once ("head.php"); ?>
+    <?php require_once("head.php"); ?>
     <!-- Include database connection and utility functions -->
     <?php
-    // require_once("dB/conn.php");
-    require_once ("dB/functions.php");
+    require_once("dB/conn.php");
+    require_once("dB/functions.php");
+    require_once("dB/bookResponse.php");
     ?>
     <!-- Link to the main stylesheet for this page -->
     <link href="styles/bookTable.css" rel="stylesheet"/>
   </head>
-  <body>
+  <body onload="document.getElementById('bookingForm').scrollIntoView({behavior:'smooth'})">
     <div>
       <!-- Navigation bar included from a separate PHP file -->
       <?php require_once ("navBar.php"); ?>
@@ -22,7 +23,7 @@
           <div id="bgImage" class="bgImage visually-hidden"></div>
         </div>
         <!-- Food menu modal included from a separate PHP file -->
-        <?php require_once ("foodMenuModal.php"); ?>
+        <?php require_once("foodMenuModal.php"); ?>
       </div>
       <div class="container-fluid formContainer" id="bookingForm">
         <div class="row justify-content-center">
@@ -32,9 +33,11 @@
                 <div class="card-body rounded-5 border border-secondary-subtle">
                   <h2 class="card-title p-0 pb-2 m-0 display-5">Table Booking</h2><hr>
                   <div class="p-3 m-3">
-                    <form class="row g-3" novalidate method="POST" action="<?php echo htmlspecialchars($_SERVER["REQUEST_URI"]); ?>">
+                    <form class="row g-3" method="POST" action="<?php echo htmlspecialchars($_SERVER["REQUEST_URI"]); ?>">
                       <span class="font-monospace fst-italic text-danger">*&nbsp;required field</span><br>
-                      <input type="hidden" class="form-control form-control-lg border border-secondary-subtle" id="Reservation_ID " name="Reservation_ID " autocomplete="off" value="">
+                      <input type="hidden" class="d-none" id="Reservation_ID" name="Reservation_ID" autocomplete="off" hidden>
+                      <!-- <input type="hidden" class="d-none" id="Status" name="Status" autocomplete="off" hidden> -->
+                      <!-- <input type="hidden" class="d-none" id="Submitted_Reservation" name="Submitted_Reservation" autocomplete="off" hidden> -->
                       <div class="col-md-6">
                         <label for="Customer_First_Name" class="form-label col-form-label-lg" title="ex. John">
                           First Name&nbsp;<span class="font-monospace fst-italic small text-danger">*</span>
@@ -63,9 +66,9 @@
                         <span class="font-monospace fst-italic small text-danger"></span>
                       </div>
                       <div class="col-md-6">
-                        <label for="Customer_Phone" class="form-label col-form-label-lg" title="ex. 09777777777">
+                        <label for="Customer_Phone" class="form-label col-form-label-lg" title="ex. 09767573727">
                           Phone Number&nbsp;<span class="font-monospace fst-italic small text-danger">*</span></label>
-                        <input type="number" class="form-control form-control-lg border border-secondary-subtle" id="Customer_Phone" placeholder="Phone Number" aria-label="Phone Number" name="Customer_Phone" autocomplete="off" title="ex. 09777777777" maxlength="11" value="" required>
+                        <input type="tel" class="form-control form-control-lg border border-secondary-subtle" id="Customer_Phone" placeholder="Phone Number" aria-label="Phone Number" name="Customer_Phone" autocomplete="off" maxlength="11" minlength="11" pattern="[0-9]{11}" title="ex. 09767573727" value="" required>
                         <span class="font-monospace fst-italic small text-danger">
                         </span>
                       </div>
@@ -79,12 +82,12 @@
                       <div class="col-md-6 center-all">
                         <label for="Reservation_Time" class="form-label col-form-label-lg">
                           Time&nbsp;<span class="font-monospace fst-italic small text-danger">*</span></label>
-                        <input type="time" class="form-control form-control-lg border border-secondary-subtle" id="Reservation_Time" aria-label="Time" name="Reservation_Time" autocomplete="off" onclick="getCurrentTime(); this.onclick=null;" step="1800" pattern="[0-9]{2}:[0-9]{2}" required>
+                        <input type="time" class="form-control form-control-lg border border-secondary-subtle" id="Reservation_Time" aria-label="Time" name="Reservation_Time" autocomplete="off" onclick="getCurrentTime(); this.onclick=null;" step="300" pattern="[0-9]{2}:[0-9]{2}" required>
                         <span class="font-monospace fst-italic small text-danger">
                         </span>
                       </div>
                       <div class="col-md-6 mt-5">
-                        <button type="submit" class="btn btn-success btn-lg" name="submit" id="submit" disabled>Book</button>
+                        <button type="submit" class="btn btn-success btn-lg" name="submit" id="submit">Book</button>
                       </div>
                       <div class="col-md-6 mt-5">
                         <button type="reset" class="btn btn-warning btn-lg" name="reset" id="reset">Clear</button>
