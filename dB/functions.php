@@ -27,3 +27,6 @@ function fix_name($data)
     // Return the formatted name
     return $data;
 }
+function removeLastChars($string) {
+    return substr($string, 0, -3);
+}

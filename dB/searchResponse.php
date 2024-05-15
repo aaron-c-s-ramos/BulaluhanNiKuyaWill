@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["submit"]))
         $Reservation_Date = $row['Reservation_Date'];
         $Reservation_Time = $row['Reservation_Time'];
         $Status = $row['Status'];
-        $Submitted_Reservation = $row['Submitted_Reservation'];
+        $Submitted_Reservation = removeLastChars($row['Submitted_Reservation']);
       }
       else
       {
