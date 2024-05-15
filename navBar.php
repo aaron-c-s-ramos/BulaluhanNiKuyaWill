@@ -1,11 +1,11 @@
 <header>
   <!-- Navigation bar with responsive design and fixed top position -->
-  <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
+  <nav class="navbar navbar-expand-lg fixed-top bg-success">
     <!-- Container for navigation items, aligned to both ends -->
     <div class="container-fluid d-flex justify-content-between">
       <!-- Branding section with textual logo -->
       <div>
-          <h3 class="navbar-brand fs-3 text-uppercase fw-bold">Bulaluhan ni Kuya Will</h3>
+          <h3 class="navbar-brand fs-3 text-uppercase fw-bold text-white">Bulaluhan ni Kuya Will</h3>
       </div>
       <!-- Toggle button for smaller screens -->
       <div>
