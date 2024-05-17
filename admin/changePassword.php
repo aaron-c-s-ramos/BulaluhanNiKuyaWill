@@ -1,14 +1,15 @@
 <?php
-include("session-checker.php");
+require_once("session-checker.php");
 
 if (isset($_POST['submit']))
 {
-    include("connection.php");
+    require_once("connection.php");
 
     try
     {
         $username = $_SESSION['Username'];
         $password = $_POST['password'];
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
         $sql = 'UPDATE tbl_admin
                 SET password = :password
@@ -16,7 +17,7 @@ if (isset($_POST['submit']))
 
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':username', $username);
-        $stmt->bindParam(':password', $password);
+        $stmt->bindParam(':password', $hashedPassword);
 
         $stmt->execute();
         $changeSuccess = "<span style='color:green' class='fs-3'>Your password has been changed. Please login again.</span>";
@@ -44,7 +45,7 @@ if (isset($_POST['submit']))
         <link rel="icon" type="image" href="assets/img/favicon.ico">
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous" defer></script>
     </head>
-    <body class="bg-image">
+    <body class="bg-success bg-gradient">
         <script src="js/scripts.js" defer></script>
         <div id="layoutAuthentication">
             <div id="layoutAuthentication_content">
@@ -53,7 +54,7 @@ if (isset($_POST['submit']))
                         <div class="row justify-content-center">
                             <div class="col-lg-5 mt-5 pt-3">
                                 <div class="card shadow-lg border-0 rounded-lg mt-5 bg-light bg-gradient">
-                                    <div class="card-header">
+                                    <div class="card-header text-bg-secondary bg-gradient">
                                         <h3 class="text-center font-weight-light my-4">Change Password</h3>
                                     </div>
                                     <div class="card-body">
@@ -64,8 +65,8 @@ if (isset($_POST['submit']))
                                                 <label for="password">Password</label>
                                             </div>
                                             <div class="text-center mt-4 mb-0">
-                                                <button type="submit" class="btn btn-lg btn-primary" id="submit" name="submit">Change</button>
-                                                <button type="button" class="btn btn-lg btn-primary" id="back" name="back" onclick="window.location.href='index.php';">Back</button>
+                                                <button type="submit" class="btn btn-lg btn-success bg-gradient" id="submit" name="submit">Change</button>
+                                                <button type="button" class="btn btn-lg btn-danger bg-gradient" id="back" name="back" onclick="window.location.href='index.php';">Back</button>
                                             </div>
                                         </form>
                                     </div>
@@ -94,7 +95,7 @@ if (isset($_POST['submit']))
                 <footer class="py-4 bg-light mt-auto bg-light bg-gradient">
                     <div class="container-fluid px-4">
                         <div class="text-center small">
-                            <div class="text-mute">Copyright &copy; Bulaluhan ni Kuya Will 2023</div>
+                            <div class="text-mute">Copyright &copy; Bulaluhan ni Kuya Will 2024</div>
                         </div>
                     </div>
                 </footer>

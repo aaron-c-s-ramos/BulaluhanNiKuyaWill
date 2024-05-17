@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Generation Time: May 10, 2024 at 05:53 PM
+-- Generation Time: May 17, 2024 at 04:09 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -31,7 +31,8 @@ USE `id22124684_bulaluhan_ni_kuya_will`;
 
 CREATE TABLE `current_reservations` (
   `Reservation_ID` int(11) NOT NULL,
-  `Customer_Name` varchar(255) NOT NULL,
+  `Customer_First_Name` varchar(255) NOT NULL,
+  `Customer_Last_Name` varchar(255) NOT NULL,
   `Customer_Phone` bigint(20) NOT NULL,
   `Reservation_Date` date NOT NULL,
   `Reservation_Time` time NOT NULL,
@@ -44,8 +45,28 @@ CREATE TABLE `current_reservations` (
 -- Dumping data for table `current_reservations`
 --
 
-INSERT INTO `current_reservations` (`Reservation_ID`, `Customer_Name`, `Customer_Phone`, `Reservation_Date`, `Reservation_Time`, `Number_Of_Guests`, `Status`, `Submitted_Reservation`) VALUES
-(1, 'Test User', 9777777777, '2024-05-11', '20:55:15', 1, 'Pending', '2024-05-10 12:55:34');
+INSERT INTO `current_reservations` (`Reservation_ID`, `Customer_First_Name`, `Customer_Last_Name`, `Customer_Phone`, `Reservation_Date`, `Reservation_Time`, `Number_Of_Guests`, `Status`, `Submitted_Reservation`) VALUES
+(45, 'Aaron Christopher', 'Ramos', 9777443078, '2024-05-17', '13:20:00', 1, 'Approved', '2024-05-17 03:42:58'),
+(47, 'Vince Emmanuel', 'Sy', 9123567912, '2024-05-17', '23:05:00', 2, 'Pending', '2024-05-17 14:02:16');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_admin`
+--
+
+CREATE TABLE `tbl_admin` (
+  `admin_id` int(11) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_admin`
+--
+
+INSERT INTO `tbl_admin` (`admin_id`, `username`, `password`) VALUES
+(1, 'KuyaWill', '$2y$10$L6Lou8eVZTuePLmq5bkNNe.8Gae/38rkw9yGfYhMqo.GLs1OpKOca');
 
 --
 -- Indexes for dumped tables
@@ -58,6 +79,12 @@ ALTER TABLE `current_reservations`
   ADD PRIMARY KEY (`Reservation_ID`);
 
 --
+-- Indexes for table `tbl_admin`
+--
+ALTER TABLE `tbl_admin`
+  ADD PRIMARY KEY (`admin_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -65,7 +92,13 @@ ALTER TABLE `current_reservations`
 -- AUTO_INCREMENT for table `current_reservations`
 --
 ALTER TABLE `current_reservations`
-  MODIFY `Reservation_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `Reservation_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+
+--
+-- AUTO_INCREMENT for table `tbl_admin`
+--
+ALTER TABLE `tbl_admin`
+  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

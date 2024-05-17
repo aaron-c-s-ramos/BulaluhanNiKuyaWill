@@ -1,7 +1,7 @@
 <?php
 if (isset($_POST['submit']))
 {
-    include("connection.php");
+    require_once("connection.php");
 
     $admin_id = $_POST['admin_id'];
     $username = $_POST['username'];
@@ -56,7 +56,7 @@ if (isset($_POST['submit']))
 
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     </head>
-    <body class="bg-image">
+    <body class="bg-success bg-gradient">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
         <script src="js/scripts.js"></script>
 
@@ -67,7 +67,7 @@ if (isset($_POST['submit']))
                         <div class="row justify-content-center">
                             <div class="col-lg-5 mt-0 pt-0">
                                 <div class="card shadow-lg border-0 rounded-lg mt-5 bg-light bg-gradient">
-                                    <div class="card-header">
+                                    <div class="card-header text-bg-secondary bg-gradient">
                                         <h3 class="text-center font-weight-light my-4">Password Recovery</h3>
                                     </div>
                                     <div class="card-body">
@@ -82,8 +82,8 @@ if (isset($_POST['submit']))
                                                 <label for="admin_id">Admin ID</label>
                                             </div>
                                             <div class="text-center mt-4 mb-0">
-                                                <button type="submit" class="btn btn-lg btn-primary" id="submit" name="submit">Reset</button>
-                                                <button type="button" class="btn btn-lg btn-primary" id="back" name="back" onclick="window.location.href='login.php';">Back</button>
+                                                <button type="submit" class="btn btn-lg btn-success bg-gradient" id="submit" name="submit">Reset</button>
+                                                <button type="button" class="btn btn-lg btn-danger bg-gradient" id="back" name="back" onclick="window.location.href='login.php';">Back</button>
                                             </div>
                                         </form>
                                     </div>
@@ -124,7 +124,7 @@ if (isset($_POST['submit']))
                 <footer class="py-4 bg-light mt-auto bg-light bg-gradient">
                     <div class="container-fluid px-4">
                         <div class="text-center">
-                            <div class="text-mute">Copyright &copy; Bulaluhan ni Kuya Will 2023</div>
+                            <div class="text-mute">Copyright &copy; Bulaluhan ni Kuya Will 2024</div>
                         </div>
                     </div>
                 </footer>

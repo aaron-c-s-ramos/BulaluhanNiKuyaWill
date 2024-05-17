@@ -37,22 +37,8 @@
                     <h2 class="card-title p-0 pb-2 m-0 display-5">Reservation Checking</h2><hr>
                     <div class="p-3 m-3">
                       <div class="row g-3">
-                        <form class="text-center" action="<?php echo htmlspecialchars($_SERVER["REQUEST_URI"]); ?>" method="POST">
-                          <span class="font-monospace fst-italic text-danger">*&nbsp;required field</span><br>
-                          <div>
-                            <label for="Reservation_ID" class="form-label col-form-label-lg">
-                              Reservation ID&nbsp;<span class="font-monospace fst-italic small text-danger">*</span></label>
-                            <input type="number" class="form-control form-control-lg border border-secondary-subtle" id="Reservation_ID" placeholder="Reservation ID" aria-label="Reservation ID" name="Reservation_ID" required>
-                          </div>
-                          <div>
-                            <label for="Customer_Phone" class="form-label col-form-label-lg">
-                              Phone Number&nbsp;<span class="font-monospace fst-italic small text-danger">*</span></label>
-                            <input type="number" class="form-control form-control-lg border border-secondary-subtle mb-2" id="Customer_Phone" placeholder="Phone Number" aria-label="Phone Number" name="Customer_Phone" maxlength="11" minlength="10" required>
-                          </div>
-                          <div>
-                            <button type="submit" class="btn btn-lg btn-success mt-3 mb-1" name="submit" id="submit">Search</button>
-                          </div>
-                        </form>
+                        <form class="text-center" action="dB/update.php" method="POST">
+                          <span class="font-monospace fst-italic text-secondary-emphasis">*&nbsp;Can be edited.</span><br>
                           <div>
                             <label for="Reservation_ID" class="form-label col-form-label-lg">Reservation ID</label>
                             <input type="number" class="form-control form-control-lg border border-secondary-subtle" id="Reservation_ID" placeholder="Reservation ID" aria-label="Reservation ID" name="Reservation_ID" value="<?php echo $Reservation_ID; ?>" readonly>
@@ -62,33 +48,43 @@
                             <input type="text" class="form-control form-control-lg border border-secondary-subtle" id="Status" placeholder="Status" aria-label="Status" name="Status" value="<?php echo $Status; ?>" readonly>
                           </div>
                           <div>
-                            <label for="Customer_First_Name" class="form-label col-form-label-lg">First Name</label>
-                            <input type="text" class="form-control form-control-lg border border-secondary-subtle" id="Customer_First_Name" placeholder="First Name" aria-label="First Name" name="Customer_First_Name" value="<?php echo $Customer_First_Name; ?>" readonly>
+                            <label for="Customer_First_Name" class="form-label col-form-label-lg">
+                              First Name&nbsp;<span class="font-monospace fst-italic small text-secondary-emphasis">*</span></label>
+                            <input type="text" class="form-control form-control-lg border border-secondary-subtle" id="Customer_First_Name" placeholder="First Name" aria-label="First Name" name="Customer_First_Name" value="<?php echo $Customer_First_Name; ?>">
                           </div>
                           <div>
-                            <label for="Customer_Last_Name" class="form-label col-form-label-lg">Last Name</label>
-                            <input type="text" class="form-control form-control-lg border border-secondary-subtle" id="Customer_Last_Name" placeholder="Last Name" aria-label="Last Name" name="Customer_Last_Name" value="<?php echo $Customer_Last_Name; ?>" readonly>
+                            <label for="Customer_Last_Name" class="form-label col-form-label-lg">
+                              Last Name&nbsp;<span class="font-monospace fst-italic small text-secondary-emphasis">*</span></label>
+                            <input type="text" class="form-control form-control-lg border border-secondary-subtle" id="Customer_Last_Name" placeholder="Last Name" aria-label="Last Name" name="Customer_Last_Name" value="<?php echo $Customer_Last_Name; ?>">
                           </div>
                           <div>
-                            <label for="Number_Of_Guests" class="form-label col-form-label-lg">Guest Quantity</label>
-                            <input type="number" class="form-control form-control-lg border border-secondary-subtle" id="Number_Of_Guests" placeholder="Number of Guests" aria-label="- Number of Guests -" name="Number_Of_Guests" value="<?php echo $Number_Of_Guests; ?>" readonly>
+                            <label for="Number_Of_Guests" class="form-label col-form-label-lg">
+                              Guest Quantity&nbsp;<span class="font-monospace fst-italic small text-secondary-emphasis">*</span></label>
+                            <input type="number" class="form-control form-control-lg border border-secondary-subtle" id="Number_Of_Guests" placeholder="Number of Guests" aria-label="- Number of Guests -" name="Number_Of_Guests" value="<?php echo $Number_Of_Guests; ?>">
                           </div>
                           <div>
-                            <label for="Customer_Phone" class="form-label col-form-label-lg">Phone Number</label>
-                            <input type="tel" class="form-control form-control-lg border border-secondary-subtle" id="Customer_Phone" placeholder="Phone Number" aria-label="Phone Number" name="Customer_Phone" value="<?php echo $Customer_Phone; ?>" readonly>
+                            <label for="Customer_Phone" class="form-label col-form-label-lg">
+                              Phone Number&nbsp;<span class="font-monospace fst-italic small text-secondary-emphasis">*</span></label>
+                            <input type="tel" class="form-control form-control-lg border border-secondary-subtle" id="Customer_Phone" placeholder="Phone Number" aria-label="Phone Number" name="Customer_Phone" value="<?php echo $Customer_Phone; ?>">
                           </div>
                           <div>
-                            <label for="Reservation_Date" class="form-label col-form-label-lg">Date</label>
-                            <input type="date" class="form-control form-control-lg border border-secondary-subtle" id="Reservation_Date" aria-label="Date" name="Reservation_Date" value="<?php echo $Reservation_Date; ?>" readonly>
+                            <label for="Reservation_Date" class="form-label col-form-label-lg">
+                              Date&nbsp;<span class="font-monospace fst-italic small text-secondary-emphasis">*</span></label>
+                            <input type="date" class="form-control form-control-lg border border-secondary-subtle" id="Reservation_Date" aria-label="Date" name="Reservation_Date" value="<?php echo $Reservation_Date; ?>">
                           </div>
                           <div>
-                            <label for="Reservation_Time" class="form-label col-form-label-lg">Time</label>
-                            <input type="time" class="form-control form-control-lg border border-secondary-subtle" id="Reservation_Time" aria-label="Time" name="Reservation_Time" value="<?php echo $Reservation_Time; ?>" readonly>
+                            <label for="Reservation_Time" class="form-label col-form-label-lg">
+                              Time&nbsp;<span class="font-monospace fst-italic small text-secondary-emphasis">*</span></label>
+                            <input type="time" class="form-control form-control-lg border border-secondary-subtle" id="Reservation_Time" aria-label="Time" name="Reservation_Time" value="<?php echo $Reservation_Time; ?>">
                           </div>
                           <div>
                             <label for="Submitted_Reservation" class="form-label col-form-label-lg">Submitted On</label>
-                            <input type="datetime-local" class="form-control form-control-lg border border-secondary-subtle" id="Submitted_Reservation" aria-label="Submitted Reservation Date" name="Submitted_Reservation" value="<?php echo $Submitted_Reservation; ?>" readonly>
+                            <input type="datetime-local" class="form-control form-control-lg border border-secondary-subtle" id="Submitted_Reservation" aria-label="Submitted Reservation Date" name="Submitted_Reservation" value="<?php echo $Submitted_Reservation; ?>">
                           </div>
+                          <div>
+                            <button type="submit" class="btn btn-lg btn-success bg-gradient mt-3 mb-1" name="submit" id="submit">Submit Edit</button>
+                          </div>
+                        </form>
                       </div>
                     </div>
                   </div>

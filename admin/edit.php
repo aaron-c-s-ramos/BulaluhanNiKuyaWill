@@ -1,6 +1,6 @@
 <?php
-include("session-checker.php");
-include("connection.php");
+require_once("session-checker.php");
+require_once("connection.php");
 ?>
 <!DOCTYPE html>
 <html lang="EN">

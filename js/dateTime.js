@@ -10,7 +10,8 @@ function getCurrentDate()
   document.getElementById('Reservation_Date').removeAttribute('onclick');
 }
 // Function to get the current time in the format HH:MM
-function getCurrentTime() {
+function getCurrentTime()
+{
   var today = new Date();
   var hours = String(today.getHours() + 1).padStart(2, '0');
   var minutes = String(today.getMinutes()).padStart(2, '0');

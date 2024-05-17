@@ -5,27 +5,20 @@ session_start();
 
 if (isset($_POST['submit']))
 {
-    include("connection.php");
-
-    $sql = "SELECT * FROM tbl_admin ORDER BY admin_id DESC";
-    $stmt = $conn->prepare($sql);
-    $stmt->execute();
-
-    $logins = array();
-
-    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        $userName = $row['username'];
-        $passWord = $row['password'];
-
-        $logins[$userName] = $passWord;
-    }
+    require_once("connection.php");
 
     $Username = isset($_POST['Username']) ? $_POST['Username'] : '';
     $Password = isset($_POST['Password']) ? $_POST['Password'] : '';
 
-    if (isset($logins[$Username]) && $logins[$Username] == $Password) {
+    $sql = "SELECT * FROM tbl_admin WHERE username = :username";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(':username', $Username);
+    $stmt->execute();
+
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);;
+
+    if ($user && password_verify($Password, $user['password'])) {
         $_SESSION['Username'] = $Username;
-        $_SESSION['Password'] = $Password;
         header("location:index.php");
         exit;
     }
@@ -58,7 +51,7 @@ if (isset($_POST['submit']))
                         <div class="row justify-content-center">
                             <div class="col-lg-5 mt-0 pt-0">
                                 <div class="card shadow-lg border-0 rounded-lg mt-5 bg-light bg-gradient">
-                                    <div class="card-header">
+                                    <div class="card-header text-bg-secondary bg-gradient ">
                                         <h3 class="text-center font-weight-light my-4">Login</h3>
                                     </div>
                                     <div class="card-body">
@@ -73,7 +66,7 @@ if (isset($_POST['submit']))
                                             </div>
                                             <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
                                                 <a href="resetPassword.php">Forgot Password?</a>
-                                                <button type="submit" class="btn btn-lg btn-primary" id="submit" name="submit">Login</button>
+                                                <button type="submit" class="btn btn-lg btn-success bg-gradient" id="submit" name="submit">Login</button>
                                             </div>
                                         </form>
                                     </div>
@@ -98,7 +91,7 @@ if (isset($_POST['submit']))
                 <footer class="py-4 bg-light mt-auto bg-light bg-gradient">
                     <div class="container-fluid px-4">
                         <div class="text-center">
-                            <div class="text-mute">Copyright &copy; Bulaluhan ni Kuya Will 2023</div>
+                            <div class="text-mute">Copyright &copy; Bulaluhan ni Kuya Will 2024</div>
                         </div>
                     </div>
                 </footer>

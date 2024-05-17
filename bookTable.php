@@ -85,10 +85,10 @@
                         </span>
                       </div>
                       <div class="col-md-6 mt-5">
-                        <button type="submit" class="btn btn-success btn-lg" name="submit" id="submit">Book</button>
+                        <button type="submit" class="btn btn-success bg-gradient btn-lg" name="submit" id="submit">Book</button>
                       </div>
                       <div class="col-md-6 mt-5">
-                        <button type="reset" class="btn btn-warning btn-lg" name="reset" id="reset">Clear</button>
+                        <button type="reset" class="btn btn-warning bg-gradient btn-lg" name="reset" id="reset">Clear</button>
                       </div>
                     </form>
                   </div>

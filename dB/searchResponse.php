@@ -33,8 +33,49 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["submit"]))
       }
       else
       {
-        // Debugging message
-        echo '<script>console.log("No matching reservation found.");</script>';
+        echo '
+              <html>
+              <head>
+              </head>
+              <body>
+              <!-- Script to show an error modal when the page loads -->
+                <script type="text/javascript">
+                  document.addEventListener("DOMContentLoaded", function()
+                  {
+                    // Create a new Bootstrap modal instance for error display
+                    var noMatchModal = new bootstrap.Modal(document.getElementById(\'noMatchModal\'), {});
+                    // Show the error modal immediately
+                    noMatchModal.show();
+                  });
+                </script>
+                <!-- Error Modal -->
+                <div class="modal fade" id="noMatchModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="noMatchModalLabel">
+                  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                    <div class="modal-content">
+                      <div class="modal-header d-flex justify-content-center">
+                        <h1 class="modal-title fs-3" id="noMatchModalLabel">No Match Found!</h1>
+                      </div>
+                      <div class="modal-body fs-5">
+                      <!-- Details to be displayed -->
+                        <span style=\'color:red\' class=\'fs-3\'>
+                          There is no reservation in our database for your entry.
+                        </span>
+                      </div>
+                      <div class="modal-footer justify-content-evenly fs-5">
+                      <!-- Modal footer with error button for downloading error details -->';
+                        echo '  <span class="center-all">
+                                    <button type="button" class="btn btn-lg btn-danger mt-3 mb-3" data-bs-dismiss="modal" aria-label="Close">Close</button>
+                                </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Script to capture the screenshot -->
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA==" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
+                <!-- Script for downloading error details -->
+                <script src="../js/downloadDetails.js" defer></script>
+              </body>
+              </html>';
       }
     }
   }
@@ -51,19 +92,19 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["submit"]))
         document.addEventListener("DOMContentLoaded", function()
         {
           // Create a new Bootstrap modal instance for error display
-          var errorModal = new bootstrap.Modal(document.getElementById(\'errorModal\'), {});
+          var noMatchModal = new bootstrap.Modal(document.getElementById(\'noMatchModal\'), {});
           // Show the error modal immediately
-          errorModal.show();
+          noMatchModal.show();
         });
       </script>
       <!-- Error Modal -->
-      <div class="modal fade" id="errorModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="errorModalLabel">
+      <div class="modal fade" id="noMatchModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="noMatchModalLabel">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
           <div class="modal-content">
           <!-- Container for the screenshot content -->
             <div id="forScreenshot">
               <div class="modal-header d-flex justify-content-center">
-                <h1 class="modal-title fs-3" id="errorModalLabel">Error: Connection Failed</h1>
+                <h1 class="modal-title fs-3" id="noMatchModalLabel">Error: Connection Failed</h1>
               </div>
               <div class="modal-body fs-5">
               <!-- Error details to be displayed -->

@@ -1,6 +1,6 @@
 /*!
     * Bulaluhan ni Kuya Will - SB Admin v7.0.7 (https://startbootstrap.com/template/sb-admin)
-    * Copyright 2013-2023 Bulaluhan ni Kuya Will
+    * Copyright 2013-2024 Bulaluhan ni Kuya Will
     * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-sb-admin/blob/master/LICENSE)
     */
     // 

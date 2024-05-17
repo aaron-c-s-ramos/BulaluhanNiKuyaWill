@@ -24,7 +24,7 @@
         <div class="home-reserve-your-table-now-section heroContainer">
           <div class="home-container3">
             <!-- Big button to reserve a table -->
-            <button type="button" class="reserve-button reserveTableButton Button" id="reserveBtn">
+            <button type="button" class="reserve-button reserveTableButton Button" id="reserveBtn" onclick="window.location.href='bookTable.php';">
               <span class="home-reserve-your-table-now">&nbsp;Reserve Your Table Now&nbsp;</span>
             </button>
           </div>
